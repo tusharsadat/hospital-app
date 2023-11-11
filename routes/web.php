@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Route::get('/add-doctor', function () {
+    return view('admin.addoctor');
+})->name('dashboard');*/
+
 
 Route::get('/home', [HomeController::class, 'redirect'])->name('home');
 Route::get('/', [HomeController::class, 'index']);
+/*Route::get('/admin/add-doctor', [DoctorController::class, 'AddDoctor'])->name('addoctor');*/
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -26,4 +34,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::controller(DoctorController::class)->group(function () {
+    Route::get('/admin/add-doctor', 'AddDoctor')->name('addoctor');
+    Route::get('/admin/doc-list', 'DocList');
 });
