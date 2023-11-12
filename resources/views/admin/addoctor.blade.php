@@ -5,7 +5,20 @@
             <div class="card-body mx-4">
                 <h4 class="card-title">Add New Doctor</h4>
                 <p class="card-description"> Input informatiom </p>
-                <form class="forms-sample" action="" method="POST" enctype="multipart/form-data">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                <form class="forms-sample" action="{{ route('storedoctor') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Doctor Name</label>
@@ -19,7 +32,8 @@
                     </div>
                     <div class="form-group">
                         <label for="speciality">Speciality</label>
-                        <select style="background-color: #b2b5b5" class="form-control" id="speciality" name="speciality">
+                        <select style="background-color: #b2b5b5" class="form-control" id="speciality" name="Speciality">
+                            <option>==Selected==</option>
                             <option value="Medicine Specialist">Medicine Specialist</option>
                             <option value="Heart Specialist">Heart Specialist</option>
                             <option value="Eye Specialist">Eye Specialist</option>
@@ -28,8 +42,8 @@
                     </div>
                     <div class="form-group">
                         <label for="room">Room Number</label>
-                        <input style="background-color: #b2b5b5" type="number" class="form-control" id="room"
-                            name="room" placeholder="Enter Room Number">
+                        <input style="background-color: #b2b5b5" type="number" class="form-control" id="room_no"
+                            name="room_no" placeholder="Enter Room Number">
                     </div>
                     <div class="form-group">
                         <label for="formFile">Doctor Image</label>

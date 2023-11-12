@@ -37,6 +37,7 @@ Route::middleware([
 });
 
 Route::controller(DoctorController::class)->group(function () {
+    Route::get('/admin/all-doctor', 'index')->name('doclist');
     Route::get('/admin/add-doctor', 'AddDoctor')->name('addoctor');
-    Route::get('/admin/doc-list', 'DocList');
+    Route::post('/admin/store-doctor', 'StoreDoctor')->name('storedoctor');
 });

@@ -1,51 +1,49 @@
 @extends('admin.layouts.template')
 @section('content')
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-lg-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic form elements</h4>
-                <p class="card-description"> Basic form elements </p>
-                <form class="forms-sample">
-                    <div class="form-group">
-                        <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                @if (Session::get('message'))
+                    <div class="alert alert-success">
+                        {{ Session::get('message') }}
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                @endif
+
+                @if (Session::get('fail'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('fail') }}
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword4">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleSelectGender">Gender</label>
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>File upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                            <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputCity1">City</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleTextarea1">Textarea</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-dark">Cancel</button>
-                </form>
+                @endif
+                <h4 class="card-title">All Doctor List</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-contextual">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Doctor name </th>
+                                <th> Speciality </th>
+                                <th> Phone Number </th>
+                                <th> Room No </th>
+                                <th> Image </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($doctor_info as $doctors)
+                                <tr class="table-dark">
+                                    <td> {{ $doctors->id }} </td>
+                                    <td> {{ $doctors->name }} </td>
+                                    <td> {{ $doctors->Speciality }} </td>
+                                    <td> {{ $doctors->phone }} </td>
+                                    <td> {{ $doctors->room_no }} </td>
+                                    <td> <img style="height: 50px,wdith:50px" src="{{ asset('upload/' . $doctors->image) }}"
+                                            alt=""> </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
