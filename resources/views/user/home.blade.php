@@ -105,6 +105,19 @@
             </div> <!-- .container -->
         </nav>
     </header>
+    @if (Session::get('message'))
+        <div class="alert alert-success">
+            {{ Session::get('message') }}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </div>
+    @endif
+
+    @if (Session::get('fail'))
+        <div class="alert alert-danger">
+            {{ Session::get('fail') }}
+        </div>
+    @endif
 
     <div class="page-hero bg-image overlay-dark" style="background-image: url(../assets/img/bg_image_1.jpg);">
         <div class="hero-section">

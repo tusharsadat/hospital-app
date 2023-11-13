@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Doctor;
 
 use Illuminate\Http\Request;
@@ -25,7 +26,38 @@ class HomeController extends Controller
 
     public function index()
     {
-        $doctor_info = Doctor::latest()->get();
-        return view('user.home', compact('doctor_info'));
+        if (Auth::id()) {
+            return redirect('home');
+        } else {
+            $doctor_info = Doctor::latest()->get();
+            return view('user.home', compact('doctor_info'));
+        }
+    }
+
+    public function Appointment(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'email',
+            'phone' => 'required',
+            'doctor' => 'required',
+            'date' => 'required',
+        ]);
+
+        $data = new Appointment;
+
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->doctor = $request->doctor;
+        $data->date = $request->date;
+        $data->message = $request->message;
+        $data->status = 'In progress';
+        if (Auth::id()) {
+            $data->user_id = Auth::user()->id;
+        }
+        $data->save();
+
+        return redirect()->back()->with('message', 'Appointment request successful.We will contact soon');
     }
 }

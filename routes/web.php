@@ -19,12 +19,9 @@ use Illuminate\Support\Facades\Route;
     return view('admin.addoctor');
 })->name('dashboard');*/
 
-
-Route::get('/home', [HomeController::class, 'redirect'])->name('home');
 Route::get('/', [HomeController::class, 'index']);
-/*Route::get('/admin/add-doctor', [DoctorController::class, 'AddDoctor'])->name('addoctor');*/
-
-
+Route::get('/home', [HomeController::class, 'redirect'])->name('home');
+Route::post('/appointment', [HomeController::class, 'Appointment'])->name('appointment');
 
 Route::middleware([
     'auth:sanctum',
