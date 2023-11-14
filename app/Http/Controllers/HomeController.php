@@ -20,7 +20,7 @@ class HomeController extends Controller
                 return view('admin.home');
             }
         } else {
-            return redirect()->back();
+            return redirect('/');
         }
     }
 
@@ -59,5 +59,18 @@ class HomeController extends Controller
         $data->save();
 
         return redirect()->back()->with('message', 'Appointment request successful.We will contact soon');
+    }
+
+    public function Myappointment()
+    {
+        if (Auth::id()) {
+
+            $user_id = Auth::user()->id;
+            $user_appoint_info = Appointment::where('user_id', $user_id)->get();
+
+            return view('user.my_appointment', compact('user_appoint_info'));
+        } else {
+            return redirect()->back();
+        }
     }
 }
