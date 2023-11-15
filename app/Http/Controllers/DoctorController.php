@@ -4,18 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
     public function index()
     {
-        $doctor_info = Doctor::latest()->get();
-        return view('admin.doclist', compact('doctor_info'));
+        if (Auth::id()) {
+            $doctor_info = Doctor::latest()->get();
+            return view('admin.doclist', compact('doctor_info'));
+        } else {
+            return redirect('/');
+        }
     }
 
     public function AddDoctor()
     {
-        return view('admin.addoctor');
+        if (Auth::id()) {
+            return view('admin.addoctor');
+        } else {
+            return redirect('/');
+        }
     }
 
     public function StoreDoctor(Request $request)

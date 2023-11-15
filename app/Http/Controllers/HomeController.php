@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'email',
+            'email' => 'nullable|email',
             'phone' => 'required',
             'doctor' => 'required',
             'date' => 'required',
@@ -72,5 +72,12 @@ class HomeController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function CancleAppointment($id)
+    {
+        Appointment::findOrFail($id)->delete();
+
+        return redirect()->back()->with('message', 'Appointment cancle successfully');
     }
 }

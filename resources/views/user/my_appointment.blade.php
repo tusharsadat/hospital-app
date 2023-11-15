@@ -110,7 +110,21 @@
     </header>
     <div class="container">
         <h2 style="font-weight: 900" class="card-title m-4 text-center">Your All Appointment List</h2>
-        <table class="table table-striped m-4">
+        @if (Session::get('message'))
+            <div class="alert alert-success">
+                {{ Session::get('message') }}
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        @if (Session::get('fail'))
+            <div class="alert alert-danger">
+                {{ Session::get('fail') }}
+            </div>
+        @endif
+        <table class="table table-striped my-4">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -118,6 +132,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Message</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -128,6 +143,8 @@
                         <td>{{ $appoint_info->date }}</td>
                         <td>{{ $appoint_info->message }}</td>
                         <td>{{ $appoint_info->status }}</td>
+                        <td><a href="{{ route('cancleappointment', $appoint_info->id) }}" class="btn btn-warning"
+                                onclick="return confirm('Are you sure to cancle this?')">Cancle Appointment</a></td>
                     </tr>
                 @endforeach
 
