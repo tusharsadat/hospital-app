@@ -17,4 +17,26 @@ class AdminController extends Controller
             return redirect('/');
         }
     }
+
+    public function approveAppointment($id)
+    {
+        $data = Appointment::find($id);
+
+        $data->status = "Approved";
+
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function CancleAppointment($id)
+    {
+        $data = Appointment::find($id);
+
+        $data->status = "Cancle";
+
+        $data->save();
+
+        return redirect()->back();
+    }
 }
