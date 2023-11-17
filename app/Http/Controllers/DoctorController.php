@@ -55,4 +55,23 @@ class DoctorController extends Controller
 
         return redirect()->route('doclist')->with('message', 'Doctor added successfully');
     }
+
+    public function EditDoctor($id)
+    {
+        $doctor_info = Doctor::findOrFail($id);
+
+        return view('admin.editdoctor', compact('doctor_info'));
+    }
+
+    public function UpdateDoctor()
+    {
+    }
+
+    public function DeleteDoctor($id)
+    {
+        $data = Doctor::find($id);
+        $data->delete();
+
+        return redirect()->back();
+    }
 }

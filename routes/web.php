@@ -40,6 +40,9 @@ Route::controller(DoctorController::class)->group(function () {
     Route::get('/admin/all-doctor', 'index')->name('doclist');
     Route::get('/admin/add-doctor', 'AddDoctor')->name('addoctor');
     Route::post('/admin/store-doctor', 'StoreDoctor')->name('storedoctor');
+    Route::get('/admin/edit-doctor/{id}', 'EditDoctor')->name('editdoctor');
+    Route::post('/admin/update-doctor', 'UpdateDoctor')->name('updatedoctor');
+    Route::get('/admin/delete-doctor/{id}', 'DeleteDoctor')->name('deletedoctor');
 });
 
 Route::get('/admin/all-appointments', [AdminController::class, 'ShowAppointment'])->name('allappointments');
