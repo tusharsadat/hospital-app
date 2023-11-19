@@ -58,11 +58,9 @@
                     </div>
                     <div class="form-group">
                         <label for="details">Doctor Details</label>
-                        <textarea style="background-color: #b2b5b5" class="form-control" id="details" name="details"
-                            value="{{ $doctor_info->details }}" rows="4"></textarea>
+                        <textarea style="background-color: #b2b5b5" class="form-control" id="details" name="details" rows="4">{{ $doctor_info->details }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-dark">Cancel</button>
                 </form>
             </div>
         </div>
