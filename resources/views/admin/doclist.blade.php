@@ -43,6 +43,7 @@
                                     <td><a href="{{ route('editdoctor', $doctors->id) }}" class="btn btn-info">Edit</a></td>
                                     <td><a href="{{ route('deletedoctor', $doctors->id) }}" class="btn btn-warning"
                                             onclick="return confirm('Are you sure to delete this?')">Delete</a></td>
+
                                 </tr>
                             @endforeach
                         </tbody>

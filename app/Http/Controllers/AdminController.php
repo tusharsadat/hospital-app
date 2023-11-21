@@ -39,4 +39,10 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function SendUserMail($id)
+    {
+        $appointment_info = Appointment::find($id);
+        return view('admin.send_user_mail', compact('appointment_info'));
+    }
 }

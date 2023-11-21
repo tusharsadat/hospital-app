@@ -48,3 +48,4 @@ Route::controller(DoctorController::class)->group(function () {
 Route::get('/admin/all-appointments', [AdminController::class, 'ShowAppointment'])->name('allappointments');
 Route::get('/admin/approve-appointment/{id}', [AdminController::class, 'approveAppointment'])->name('approve-appointment');
 Route::get('/admin/cancle-appointment/{id}', [AdminController::class, 'CancleAppointment'])->name('cancle-appointment');
+Route::get('/admin/send-mail/{id}', [AdminController::class, 'SendUserMail'])->name('sendmail');

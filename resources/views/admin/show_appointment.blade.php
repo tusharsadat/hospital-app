@@ -29,8 +29,9 @@
                                 <th> Serial Date </th>
                                 <th> Message </th>
                                 <th> Status </th>
-                                <th> Approved </th>
-                                <th> Cancled </th>
+                                <th> Action </th>
+                                <th> Action </th>
+                                <th> Action </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,9 @@
                                             class="btn btn-success">Approved</a></td>
                                     <td><a href="{{ route('cancle-appointment', $appointments->id) }}"
                                             class="btn btn-warning">Cancled</a></td>
+                                    <td><a href="{{ route('sendmail', $appointments->id) }}" class="btn btn-primary">Send
+                                            Mail</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
