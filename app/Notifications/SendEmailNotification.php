@@ -11,12 +11,14 @@ class SendEmailNotification extends Notification
 {
     use Queueable;
 
+    private $details;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($details)
     {
-        //
+        $this->details = $details;
     }
 
     /**
@@ -35,9 +37,10 @@ class SendEmailNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting($this->details['greeting'])
+            ->line($this->details['body'])
+            ->action($this->details['action_text'], $this->details['action_url'])
+            ->line($this->details['end_part']);
     }
 
     /**

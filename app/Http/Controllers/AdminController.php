@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Notifications\SendEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -44,5 +46,22 @@ class AdminController extends Controller
     {
         $appointment_info = Appointment::find($id);
         return view('admin.send_user_mail', compact('appointment_info'));
+    }
+
+    public function SubmitMail(Request $request, $id)
+    {
+        $data = Appointment::find($id);
+
+        $details = [
+            'greeting' => $request->greeting,
+            'body' => $request->body,
+            'action_text' => $request->action_text,
+            'action_url' => $request->action_url,
+            'end_part' => $request->end_part,
+        ];
+
+        Notification::send($data, new SendEmailNotification($details));
+
+        return redirect()->back()->with('message', 'Mail send successfully');
     }
 }

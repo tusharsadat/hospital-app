@@ -49,3 +49,4 @@ Route::get('/admin/all-appointments', [AdminController::class, 'ShowAppointment'
 Route::get('/admin/approve-appointment/{id}', [AdminController::class, 'approveAppointment'])->name('approve-appointment');
 Route::get('/admin/cancle-appointment/{id}', [AdminController::class, 'CancleAppointment'])->name('cancle-appointment');
 Route::get('/admin/send-mail/{id}', [AdminController::class, 'SendUserMail'])->name('sendmail');
+Route::post('/admin/submit-mail/{id}', [AdminController::class, 'SubmitMail'])->name('submitmail');
